@@ -4,7 +4,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: "/yossef-portfolio/",
+  base: "/yossef-showcase-portfolio/",
 
   server: {
     host: "::",
