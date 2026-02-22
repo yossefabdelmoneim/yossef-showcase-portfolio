@@ -1,27 +1,49 @@
-import { Briefcase } from "lucide-react";
+import { GraduationCap, Briefcase } from "lucide-react";
 
 export default function Experience() {
   return (
     <section id="experience" className="py-24 bg-card">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold tracking-tight mb-4">Experience</h2>
-        <div className="w-12 h-0.5 bg-foreground mb-12" />
+        <h2 className="text-4xl font-bold tracking-tight mb-12">Education & Experience</h2>
 
-        <div className="relative pl-8 border-l-2 border-border">
-          <div className="absolute -left-3 top-0 w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-            <Briefcase className="w-3 h-3 text-primary-foreground" />
+        <div className="space-y-12">
+          {/* Education */}
+          <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full border border-border flex items-center justify-center mt-1">
+              <GraduationCap className="w-4 h-4 text-muted-foreground" />
+            </div>
+            <div className="border-l border-border pl-6">
+              <p className="text-sm text-muted-foreground mb-1">Oct 2023 – Present · Cairo, Egypt</p>
+              <h3 className="text-xl font-bold mb-1">B.Sc. Computers & AI — Software Engineering</h3>
+              <p className="text-muted-foreground text-sm">Cairo University</p>
+              <p className="text-muted-foreground text-sm">GPA: 3.35 / 4.00</p>
+            </div>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold">Backend Developer</h3>
-            <p className="text-muted-foreground text-sm mb-1">
-              Ministry of Youth and Sports — Cairo, Egypt
-            </p>
-            <p className="text-xs text-muted-foreground mb-4">12/2025 – 02/2026</p>
-            <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed">
-              <li>• Developed and maintained backend services using <strong className="text-foreground">NestJS</strong>, <strong className="text-foreground">PostgreSQL</strong>, and <strong className="text-foreground">Prisma</strong> for a Flutter mobile application deployed on App Store and Google Play.</li>
-              <li>• Designed and implemented RESTful APIs and authored API documentation; served as the main bridge between frontend and backend teams.</li>
-              <li>• Implemented core features including book and publisher search, hall navigation support, and a real-time emergency request system (medical, security, missing child) visible to admins and volunteers.</li>
-            </ul>
+
+          {/* Experience */}
+          <div className="flex gap-4">
+            <div className="flex-shrink-0 w-10 h-10 rounded-full border border-border flex items-center justify-center mt-1">
+              <Briefcase className="w-4 h-4 text-muted-foreground" />
+            </div>
+            <div className="border-l border-border pl-6">
+              <p className="text-sm text-muted-foreground mb-1">Dec 2025 – Feb 2026 · Cairo, Egypt</p>
+              <h3 className="text-xl font-bold mb-1">Backend Developer</h3>
+              <p className="text-muted-foreground text-sm mb-3">Ministry of Youth and Sports</p>
+              <ul className="space-y-2 text-sm text-muted-foreground leading-relaxed">
+                <li className="flex gap-2">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-muted-foreground flex-shrink-0" />
+                  Developed backend services using NestJS, PostgreSQL, and Prisma for a Flutter mobile app on App Store & Google Play.
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-muted-foreground flex-shrink-0" />
+                  Designed RESTful APIs and authored API documentation; served as the bridge between frontend and backend teams.
+                </li>
+                <li className="flex gap-2">
+                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-muted-foreground flex-shrink-0" />
+                  Implemented book/publisher search, hall navigation, and a real-time emergency request system.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

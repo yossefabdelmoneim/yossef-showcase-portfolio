@@ -8,29 +8,36 @@ export default function Hero() {
         <div className="flex flex-col-reverse md:flex-row items-center gap-12 md:gap-16">
           {/* Left text */}
           <div className="flex-1 text-center md:text-left">
-            <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground mb-4">
-              Hello, I'm
+            <p className="text-sm uppercase tracking-[0.3em] text-muted-foreground mb-6">
+              Full-Stack Developer
             </p>
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight mb-4">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold tracking-tight leading-[1.05] mb-6">
               Yossef
               <br />
               Abdelmoneim
             </h1>
-            <p className="text-lg text-muted-foreground mb-6 max-w-md mx-auto md:mx-0">
-              Junior Backend Developer & Software Engineering student building scalable backend systems with Node.js, NestJS & PostgreSQL.
+            <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto md:mx-0 leading-relaxed">
+              Junior Full-Stack Developer & Software Engineering student with strong foundations in full-stack development, databases, and RESTful API design.
             </p>
-            <a
-              href="#projects"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
-            >
-              View My Work
-              <ArrowDown className="w-4 h-4" />
-            </a>
+            <div className="flex items-center gap-4 justify-center md:justify-start">
+              <a
+                href="#projects"
+                className="inline-flex items-center gap-2 px-7 py-3 bg-primary text-primary-foreground rounded-full text-sm font-medium hover:opacity-90 transition-opacity"
+              >
+                View Projects
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 px-7 py-3 rounded-full text-sm font-medium border border-border hover:bg-accent transition-colors"
+              >
+                Contact Me
+              </a>
+            </div>
           </div>
 
           {/* Right photo */}
           <div className="flex-shrink-0">
-            <div className="w-56 h-56 sm:w-64 sm:h-64 lg:w-72 lg:h-72 rounded-full border-2 border-border overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.06)]">
+            <div className="w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full border-2 border-border overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.06)]">
               <img
                 src={profilePhoto}
                 alt="Yossef Abdelmoneim"
@@ -40,13 +47,13 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Social icons centered */}
-        <div className="flex items-center justify-center gap-6 mt-14">
+        {/* Social icons */}
+        <div className="flex items-center justify-center md:justify-start gap-6 mt-14">
           <a
             href="https://github.com/yossefabdelmoneim"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 rounded-full border-2 border-border hover:bg-accent hover:border-foreground transition-all"
+            className="p-3 rounded-full border border-border hover:bg-accent hover:border-foreground transition-all"
             aria-label="GitHub"
           >
             <Github className="w-6 h-6" />
@@ -55,14 +62,14 @@ export default function Hero() {
             href="https://linkedin.com/in/yossef-abdelmoneim"
             target="_blank"
             rel="noopener noreferrer"
-            className="p-4 rounded-full border-2 border-border hover:bg-accent hover:border-foreground transition-all"
+            className="p-3 rounded-full border border-border hover:bg-accent hover:border-foreground transition-all"
             aria-label="LinkedIn"
           >
             <Linkedin className="w-6 h-6" />
           </a>
           <a
             href="mailto:youssefabdelmoniem11@gmail.com"
-            className="p-4 rounded-full border-2 border-border hover:bg-accent hover:border-foreground transition-all"
+            className="p-3 rounded-full border border-border hover:bg-accent hover:border-foreground transition-all"
             aria-label="Email"
           >
             <Mail className="w-6 h-6" />

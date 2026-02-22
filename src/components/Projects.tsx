@@ -1,29 +1,29 @@
-import { Github, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
 const projects = [
   {
     title: "Book Fair Go",
-    date: "12/2025 – 02/2026",
+    date: "Dec 2025 – Feb 2026",
     description:
-      "Backend for a Flutter mobile app serving 500,000+ users at the Cairo International Book Fair. Real-time emergency system, hall navigation, and publisher search.",
-    tech: ["NestJS", "PostgreSQL", "Prisma", "REST APIs"],
+      "Scalable backend for a Flutter mobile app serving 500,000+ users at the Cairo Book Fair. Features book/publisher search, hall/booth mapping, and a real-time emergency system that helped resolve 100+ missing child cases.",
+    tech: ["NestJS", "PostgreSQL", "Prisma", "Flutter"],
     github: null,
   },
   {
     title: "Bloggy",
-    date: "09/2025",
+    date: "Sep 2025",
     description:
-      "Full CRUD blog website built with the PERN stack. RESTful API backend with a responsive React frontend.",
+      "Full CRUD blog platform built with the PERN stack. RESTful API backend with a responsive React frontend for creating, reading, updating, and deleting posts.",
     tech: ["PostgreSQL", "Express.js", "React", "Node.js"],
     github: "https://github.com/yossefabdelmoneim/Bloggy",
   },
   {
     title: "Posters",
-    date: "10/2025 – 11/2025",
+    date: "Oct – Nov 2025",
     description:
-      "Full-stack e-commerce platform for browsing, searching, and purchasing posters. Delivered to a real client in production.",
+      "Full-stack e-commerce platform for browsing, searching, and purchasing posters. Built and deployed for a real client with cart management and delivery handling.",
     tech: ["React", "Node.js", "Express.js", "PostgreSQL"],
     github: "https://github.com/yossefabdelmoneim/Posters",
   },
@@ -31,9 +31,9 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 bg-card">
+    <section id="projects" className="py-24">
       <div className="max-w-6xl mx-auto px-6">
-        <h2 className="text-3xl font-bold tracking-tight mb-4">Projects</h2>
+        <h2 className="text-4xl font-bold tracking-tight mb-4">Projects</h2>
         <div className="w-12 h-0.5 bg-foreground mb-12" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -46,23 +46,19 @@ export default function Projects() {
               <Wrapper key={p.title} {...(wrapperProps as any)}>
                 <Card className="h-full hover:border-foreground/30 transition-colors cursor-pointer group">
                   <CardContent className="p-6 flex flex-col h-full">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">
+                    <div className="flex items-start justify-between mb-2">
+                      <h3 className="text-lg font-bold group-hover:text-primary transition-colors">
                         {p.title}
                       </h3>
-                      {p.github ? (
-                        <Github className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0" />
-                      ) : (
-                        <ExternalLink className="w-5 h-5 text-muted-foreground/30 flex-shrink-0" />
-                      )}
+                      <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors flex-shrink-0 mt-1" />
                     </div>
                     <p className="text-xs text-muted-foreground mb-3">{p.date}</p>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-6 flex-1">
                       {p.description}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {p.tech.map((t) => (
-                        <Badge key={t} variant="outline" className="text-[10px] px-2 py-0.5">
+                        <Badge key={t} variant="secondary" className="text-[11px] px-2.5 py-1 rounded-md">
                           {t}
                         </Badge>
                       ))}
