@@ -1,14 +1,7 @@
-## Project info
+# Youssef Portfolio
 
-**URL**:
+Personal developer portfolio built with React + Tailwind.
 
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Run locally
+npm install
+npm run dev
