@@ -65,7 +65,7 @@ function Experience() {
                     className="relative"
                 >
                     {/* Timeline Line */}
-                    <div className="absolute bottom-0 left-[px] top-0 w-px bg-slate-200 md:left-[180px] dark:bg-slate-800" />
+                    <div className="absolute bottom-0 left-0 top-0 w-px bg-slate-200 md:left-[180px] dark:bg-slate-800" />
 
                     {experience.map((item, index) => (
                         <motion.article
