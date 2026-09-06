@@ -1,7 +1,9 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import {
     ArrowUpRight,
     Mail,
+    Send,
 } from "lucide-react";
 
 function Github({size = 21}) {
@@ -19,6 +21,119 @@ function Linkedin({size = 21}) {
         </svg>
     );
 }
+
+const CONTACT_EMAIL = "youssefabdelmoniem11@gmail.com";
+
+const inputClass =
+    "w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 placeholder-slate-400 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-500/20 dark:border-slate-700 dark:bg-black dark:text-white dark:placeholder-slate-600 dark:focus:border-slate-500";
+
+const labelClass =
+    "mb-2 block text-xs font-medium uppercase tracking-wider text-slate-500";
+
+const ContactForm = () => {
+    const [form, setForm] = useState({ name: "", email: "", message: "" });
+    const [opened, setOpened] = useState(false);
+
+    const update = (field) => (event) =>
+        setForm((current) => ({ ...current, [field]: event.target.value }));
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        const subject = encodeURIComponent(`Portfolio contact from ${form.name}`);
+        const body = encodeURIComponent(
+            `${form.message}\n\n— ${form.name} (${form.email})`
+        );
+
+        window.location.href =
+            `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+
+        setOpened(true);
+    };
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mt-8 rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-10 dark:border-slate-800 dark:bg-black"
+        >
+            <div className="mb-8 flex items-center gap-4">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 text-slate-500 dark:border-slate-800 dark:text-slate-400">
+                    <Mail size={18} />
+                </div>
+
+                <div>
+                    <h3 className="text-xl font-semibold tracking-tight text-slate-900 dark:text-white">
+                        Send me a message
+                    </h3>
+
+                    <p className="mt-0.5 text-sm text-slate-500">
+                        Opens your email app with everything prefilled.
+                    </p>
+                </div>
+            </div>
+
+            <form onSubmit={handleSubmit} className="grid gap-5 sm:grid-cols-2">
+                <label className="block">
+                    <span className={labelClass}>Name</span>
+
+                    <input
+                        type="text"
+                        value={form.name}
+                        onChange={update("name")}
+                        required
+                        placeholder="Your name"
+                        className={inputClass}
+                    />
+                </label>
+
+                <label className="block">
+                    <span className={labelClass}>Email</span>
+
+                    <input
+                        type="email"
+                        value={form.email}
+                        onChange={update("email")}
+                        required
+                        placeholder="you@example.com"
+                        className={inputClass}
+                    />
+                </label>
+
+                <label className="block sm:col-span-2">
+                    <span className={labelClass}>Message</span>
+
+                    <textarea
+                        value={form.message}
+                        onChange={update("message")}
+                        required
+                        rows={5}
+                        placeholder="Tell me about your project or idea..."
+                        className={`${inputClass} resize-none`}
+                    />
+                </label>
+
+                <div className="flex flex-wrap items-center gap-4 sm:col-span-2">
+                    <button
+                        type="submit"
+                        className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-slate-700 dark:bg-white dark:text-black dark:hover:bg-slate-200"
+                    >
+                        <Send size={16} />
+                        Send via Email
+                    </button>
+
+                    {opened && (
+                        <p className="text-sm text-slate-500">
+                            Opening your email app…
+                        </p>
+                    )}
+                </div>
+            </form>
+        </motion.div>
+    );
+};
 
 const Contact = () => {
     return (
@@ -58,7 +173,7 @@ const Contact = () => {
                         {/* CTA Buttons */}
                         <div className="mt-10 flex flex-wrap gap-4">
                             <a
-                                href="mailto:youssefabdelmoniem11@gmail.com"
+                                href={`mailto:${CONTACT_EMAIL}`}
                                 className="group inline-flex items-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:bg-slate-700 dark:bg-white dark:text-black dark:hover:bg-slate-200"
                             >
                                 <Mail size={17} />
@@ -94,7 +209,7 @@ const Contact = () => {
                 >
                     {/* Email */}
                     <a
-                        href="mailto:youssefabdelmoniem11@gmail.com"
+                        href={`mailto:${CONTACT_EMAIL}`}
                         className="group border-b border-slate-200/70 p-6 transition-colors duration-300 hover:bg-slate-100 sm:border-b-0 sm:border-r sm:p-8 dark:border-slate-800/70 dark:hover:bg-slate-900/30"
                     >
                         <div className="flex items-center justify-between">
@@ -113,8 +228,8 @@ const Contact = () => {
                             Email
                         </p>
 
-                        <p className="mt-2 break-all text-sm text-slate-700 dark:text-slate-300">
-                            youssefabdelmoniem11@gmail.com
+<p className="mt-2 break-all text-sm text-slate-700 dark:text-slate-300">
+                            {CONTACT_EMAIL}
                         </p>
                     </a>
 
@@ -174,6 +289,8 @@ const Contact = () => {
                         </p>
                     </a>
                 </motion.div>
+
+                <ContactForm />
 
                 {/* Footer */}
                 <div className="mt-12 flex flex-col gap-4 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between dark:text-slate-600">
