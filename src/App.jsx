@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig, useScroll, useSpring } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import Navbar from "./components/Navbar.jsx";
 import Hero from "./sections/Hero.jsx";
@@ -59,24 +59,26 @@ function BackToTop() {
 
 function App(){
     return (
-        <div className="min-h-screen bg-white text-slate-900 dark:bg-black dark:text-white">
-            <ScrollProgress/>
-            <Navbar/>
+        <MotionConfig reducedMotion="user">
+            <div className="min-h-screen bg-white text-slate-900 dark:bg-black dark:text-white">
+                <ScrollProgress/>
+                <Navbar/>
 
-            <main>
-                <Hero/>
-                <About/>
-                <Skills/>
-                <Experience/>
-                <Projects/>
-                <Education/>
-                <Certificates/>
-                <Activities/>
-                <Contact/>
-            </main>
+                <main>
+                    <Hero/>
+                    <About/>
+                    <Skills/>
+                    <Experience/>
+                    <Projects/>
+                    <Education/>
+                    <Certificates/>
+                    <Activities/>
+                    <Contact/>
+                </main>
 
-            <BackToTop/>
-        </div>
+                <BackToTop/>
+            </div>
+        </MotionConfig>
     )
 }
 

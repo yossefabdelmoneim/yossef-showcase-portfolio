@@ -85,6 +85,8 @@ function Hero() {
         >
             <div className="pointer-events-none absolute -left-32 top-1/3 h-96 w-96 rounded-full bg-slate-200/50 blur-3xl dark:bg-slate-800/40" />
 
+            <div className="grid-texture pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_65%_60%_at_50%_35%,black,transparent)]" />
+
             <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
                 {/* Text */}
                 <motion.div

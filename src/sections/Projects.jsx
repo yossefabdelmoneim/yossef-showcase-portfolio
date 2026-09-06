@@ -1,6 +1,15 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import {
+    AnimatePresence,
+    motion,
+    useMotionValue,
+    useSpring,
+    useTransform,
+} from "framer-motion";
 import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { projects } from "../data/projects";
+
+const categories = ["All", "Backend", "AI Engineering", "Full Stack"];
 
 function Github({size = 21}) {
     return (
@@ -11,6 +20,10 @@ function Github({size = 21}) {
 }
 
 const Projects = () => {
+    const [filter, setFilter] = useState("All");
+    const filteredProjects =
+        filter === "All" ? projects : projects.filter((project) => project.category === filter);
+
     return (
         <section
             id="projects"
@@ -39,18 +52,42 @@ const Projects = () => {
                         A selection of projects spanning backend engineering, artificial
                         intelligence, and full-stack application development.
                     </p>
+
+                    {/* Filter tabs */}
+                    <div className="mt-8 flex flex-wrap gap-2">
+                        {categories.map((category) => {
+                            const active = category === filter;
+                            return (
+                                <button
+                                    key={category}
+                                    type="button"
+                                    onClick={() => setFilter(category)}
+                                    aria-pressed={active}
+                                    className={`rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-300 ${
+                                        active
+                                            ? "border-slate-900 bg-slate-900 text-white dark:border-white dark:bg-white dark:text-black"
+                                            : "border-slate-300 text-slate-600 hover:border-slate-400 hover:text-slate-900 dark:border-slate-700 dark:text-slate-400 dark:hover:border-slate-500 dark:hover:text-white"
+                                    }`}
+                                >
+                                    {category}
+                                </button>
+                            );
+                        })}
+                    </div>
                 </motion.div>
 
                 {/* Projects */}
-                <div className="space-y-6">
-                    {projects.map((project, index) => (
-                        <ProjectCard
-                            key={project.id}
-                            project={project}
-                            index={index}
-                        />
-                    ))}
-                </div>
+                <motion.div layout className="space-y-6">
+                    <AnimatePresence mode="popLayout" initial={false}>
+                        {filteredProjects.map((project, index) => (
+                            <ProjectCard
+                                key={project.id}
+                                project={project}
+                                index={index}
+                            />
+                        ))}
+                    </AnimatePresence>
+                </motion.div>
             </div>
         </section>
     );
@@ -59,8 +96,37 @@ const Projects = () => {
 const ProjectCard = ({ project, index }) => {
     const projectLink = project.liveUrl || project.githubUrl;
 
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [7, -7]), {
+        stiffness: 200,
+        damping: 20,
+    });
+    const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-7, 7]), {
+        stiffness: 200,
+        damping: 20,
+    });
+
+    const handleMouseMove = (event) => {
+        const rect = event.currentTarget.getBoundingClientRect();
+        const px = (event.clientX - rect.left) / rect.width - 0.5;
+        const py = (event.clientY - rect.top) / rect.height - 0.5;
+
+        mouseX.set(px);
+        mouseY.set(py);
+
+        event.currentTarget.style.setProperty("--spot-x", `${event.clientX - rect.left}px`);
+        event.currentTarget.style.setProperty("--spot-y", `${event.clientY - rect.top}px`);
+    };
+
+    const handleMouseLeave = () => {
+        mouseX.set(0);
+        mouseY.set(0);
+    };
+
     return (
         <motion.article
+            layout
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
@@ -68,11 +134,18 @@ const ProjectCard = ({ project, index }) => {
                 duration: 0.6,
                 delay: index * 0.08,
             }}
+            exit={{ opacity: 0, y: 20, transition: { duration: 0.2 } }}
             whileHover={{ y: -4 }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{ rotateX, rotateY, transformPerspective: 900 }}
             className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-slate-50 transition-colors duration-300 hover:border-slate-300 dark:border-slate-800 dark:bg-black dark:hover:border-slate-600"
         >
             {/* Subtle background glow */}
             <div className="pointer-events-none absolute -right-24 -top-24 h-48 w-48 rounded-full bg-slate-300/20 blur-3xl transition-opacity duration-500 group-hover:bg-slate-400/30 dark:bg-slate-700/10 dark:group-hover:bg-slate-600/20" />
+
+            {/* Cursor spotlight glow */}
+            <div className="spotlight pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
             {/* Media */}
             <div className="relative h-40 w-full overflow-hidden sm:h-44">
