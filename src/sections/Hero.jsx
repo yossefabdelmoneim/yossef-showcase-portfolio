@@ -4,6 +4,7 @@ import { ArrowDown, Mail } from "lucide-react";
 import { projects } from "../data/projects.js";
 import { certificates } from "../data/certificates.js";
 import { skills } from "../data/skills.js";
+import profileImage from "../assets/profile/profile.jpg";
 
 const roles = [
     "Scalable Backends",
@@ -204,7 +205,7 @@ function Hero() {
                         <div className="absolute -inset-8 rounded-full border border-slate-100 dark:border-white/5" />
 
                         <img
-                            src="/images/profile/profile.jpg"
+                            src={profileImage}
                             alt="Youssef Abdelmoniem"
                             loading="lazy"
                             decoding="async"
