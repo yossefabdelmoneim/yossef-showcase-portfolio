@@ -1,3 +1,5 @@
+import ThemeToggle from "./ThemeToggle.jsx";
+
 const navLinks = [
     { href: "#about", label: "About" },
     { href: "#skills", label: "Skills" },
@@ -27,6 +29,10 @@ function Navbar(){
                             {link.label}
                         </a>
                     ))}
+
+                    <div className="ml-2">
+                        <ThemeToggle/>
+                    </div>
                 </div>
             </div>
         </nav>
