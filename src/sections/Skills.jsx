@@ -31,6 +31,8 @@ function Skills(){
             id="skills"
             className="relative overflow-hidden bg-slate-50 px-6 py-8 md:px-12 lg:px-20 lg:py-18 dark:bg-black"
         >
+            <div className="pointer-events-none absolute -left-24 top-24 h-80 w-80 rounded-full bg-slate-200/50 blur-3xl dark:bg-slate-800/40" />
+
             <div className="mx-auto max-w-6xl">
                 {/* Header */}
                 <motion.div

@@ -1,5 +1,18 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDown, Mail } from "lucide-react";
+import { projects } from "../data/projects.js";
+import { certificates } from "../data/certificates.js";
+import { skills } from "../data/skills.js";
+
+const roles = [
+    "Scalable Backends",
+    "AI & RAG Systems",
+    "Full-Stack Apps",
+    "Maintainable APIs",
+];
+
+const technologyCount = new Set(skills.flatMap((skill) => skill.technologies)).size;
 
 function Github({ size = 21 }) {
     return (
@@ -17,6 +30,53 @@ function Linkedin({ size = 21 }) {
     );
 }
 
+function RotatingRole() {
+    const [index, setIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(
+            () => setIndex((current) => (current + 1) % roles.length),
+            2600
+        );
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <span className="relative inline-flex h-5 items-center overflow-hidden align-bottom font-mono text-slate-500 dark:text-gray-400">
+            <AnimatePresence mode="wait">
+                <motion.span
+                    key={roles[index]}
+                    initial={{ y: "100%", opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: "-100%", opacity: 0 }}
+                    transition={{ duration: 0.35, ease: "easeInOut" }}
+                    className="whitespace-nowrap"
+                >
+                    {roles[index]}
+                </motion.span>
+            </AnimatePresence>
+        </span>
+    );
+}
+
+function Stat({ value, label }) {
+    return (
+        <div>
+            <p className="font-mono text-2xl font-semibold text-slate-900 dark:text-white">
+                {String(value).padStart(2, "0")}
+            </p>
+            <p className="mt-1 text-[11px] uppercase tracking-widest text-slate-500 dark:text-gray-500">
+                {label}
+            </p>
+        </div>
+    );
+}
+
+const fadeUp = {
+    hidden: { opacity: 0, y: 24 },
+    visible: { opacity: 1, y: 0 },
+};
+
 function Hero() {
     return (
         <section
@@ -27,20 +87,21 @@ function Hero() {
 
             <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
                 {/* Text */}
-                <div className="text-center md:text-left">
+                <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ staggerChildren: 0.1 }}
+                    className="text-center md:text-left"
+                >
                     <motion.p
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
+                        variants={fadeUp}
                         className="mb-4 text-sm uppercase tracking-[0.3em] text-slate-500 dark:text-gray-500"
                     >
                         Software Engineer
                     </motion.p>
 
                     <motion.h1
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
+                        variants={fadeUp}
                         className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl"
                     >
                         Hi, I'm
@@ -50,18 +111,22 @@ function Hero() {
                     </motion.h1>
 
                     <motion.p
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
+                        variants={fadeUp}
                         className="mt-6 max-w-xl text-lg leading-relaxed text-slate-600 dark:text-gray-400"
                     >
                         Software & AI Engineer. I build scalable backends, RAG-powered AI systems, and full-stack web apps with modern technologies.
                     </motion.p>
 
+                    <motion.p
+                        variants={fadeUp}
+                        className="mt-5 flex flex-wrap items-center justify-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-slate-400 md:justify-start dark:text-slate-600"
+                    >
+                        <span className="text-slate-500 dark:text-slate-500">▹</span>
+                        Building <RotatingRole />
+                    </motion.p>
+
                     <motion.div
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
+                        variants={fadeUp}
                         className="mt-8 flex flex-wrap justify-center gap-4 md:justify-start"
                     >
                         <a
@@ -80,10 +145,17 @@ function Hero() {
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 24 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                        className="mt-10 flex justify-center gap-8 md:justify-start"
+                        variants={fadeUp}
+                        className="mt-10 flex justify-center gap-8 border-t border-slate-200 pt-6 md:justify-start dark:border-slate-800"
+                    >
+                        <Stat value={projects.length} label="Projects" />
+                        <Stat value={technologyCount} label="Technologies" />
+                        <Stat value={certificates.length} label="Certifications" />
+                    </motion.div>
+
+                    <motion.div
+                        variants={fadeUp}
+                        className="mt-8 flex justify-center gap-8 md:justify-start"
                     >
                         <a
                             href="https://github.com/yossefabdelmoneim"
@@ -109,19 +181,35 @@ function Hero() {
                             <Mail size={30} />
                         </a>
                     </motion.div>
-                </div>
+                </motion.div>
 
                 {/* Profile Image */}
-                <div className="flex justify-center">
-                    <motion.img
-                        src="/images/profile/profile.jpg"
-                        alt="Youssef Abdelmoniem"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
-                        className="h-64 w-64 rounded-full border border-slate-300 object-cover sm:h-80 sm:w-80 dark:border-white/20"
-                    />
-                </div>
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="flex justify-center"
+                >
+                    <div className="relative">
+                        <motion.div
+                            animate={{ scale: [1, 1.06, 1], opacity: [0.55, 0.85, 0.55] }}
+                            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute -inset-12 rounded-full bg-gradient-to-tr from-slate-400/30 via-slate-300/20 to-transparent blur-2xl dark:from-slate-500/25 dark:via-slate-700/20"
+                        />
+
+                        <div className="absolute -inset-4 rounded-full border border-slate-200 dark:border-white/10" />
+
+                        <div className="absolute -inset-8 rounded-full border border-slate-100 dark:border-white/5" />
+
+                        <img
+                            src="/images/profile/profile.jpg"
+                            alt="Youssef Abdelmoniem"
+                            loading="lazy"
+                            decoding="async"
+                            className="relative h-64 w-64 rounded-full border border-slate-300 object-cover sm:h-80 sm:w-80 dark:border-white/20"
+                        />
+                    </div>
+                </motion.div>
             </div>
 
             <a
