@@ -28,7 +28,7 @@ export const skills = [
         description: "Designing and managing relational databases.",
         technologies: [
             "PostgreSQL",
-            "MySQL",
+            "SQL Server",
             "MySQL",
             "Prisma",
         ],
