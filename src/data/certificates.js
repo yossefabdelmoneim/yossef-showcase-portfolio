@@ -23,6 +23,14 @@ export const certificates = [
 
     {
         id: 3,
+        title: "Generative AI Professional",
+        issuer: "DEPI",
+        date: "July 2026",
+        image: DEPI,
+    },
+
+    {
+        id: 4,
         title: "The Complete Full-Stack Web Development Bootcamp",
         issuer: "Udemy",
         date: "September 2025",
