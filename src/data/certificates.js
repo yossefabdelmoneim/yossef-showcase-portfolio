@@ -1,7 +1,7 @@
 import JavaEE from "../assets/certificates/JavaEE.png";
 import UdemyCourse from "../assets/certificates/UdemyCourse.png";
 import Administration from "../assets/certificates/Administration.png";
-import DEPI from "../assets/certificates/DEPI.png";
+import DEPI from "../assets/certificates/DEPI.jpg";
 
 export const certificates = [
     {
