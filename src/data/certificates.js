@@ -5,11 +5,11 @@ import Administration from "../assets/certificates/Administration.png";
 export const certificates = [
     {
         id: 1,
-        title: "Red Hat System Administration I (RH124 - RHA) - ver.9.3",
-        issuer: "Red Hat",
-        date: "December 2025",
-        image: Administration,
-        credentialUrl: "https://www.credly.com/badges/0c78ac17-b714-4dc3-9092-f8fbcc49001e",
+        title: "Generative AI Professional",
+        issuer: "DEPI",
+        date: "July 2026",
+        image: DEPI,
+        credentialUrl: "https://drive.google.com/file/d/1aYmRV-dlempDvtYBJnd2WKRHPwfIBZsW/view?usp=sharing",
     },
 
     {
@@ -23,10 +23,11 @@ export const certificates = [
 
     {
         id: 3,
-        title: "Generative AI Professional",
-        issuer: "DEPI",
-        date: "July 2026",
-        image: DEPI,
+        title: "Red Hat System Administration I (RH124 - RHA) - ver.9.3",
+        issuer: "Red Hat",
+        date: "December 2025",
+        image: Administration,
+        credentialUrl: "https://www.credly.com/badges/0c78ac17-b714-4dc3-9092-f8fbcc49001e",
     },
 
     {
